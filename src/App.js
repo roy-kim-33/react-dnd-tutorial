@@ -1,14 +1,19 @@
-// import logo from './logo.svg';
-import "./App.css";
-import Board from "./components/Board";
-import {observe} from "./components/Game"
-
-function App() {
-  return (
-    <div className="App">
-      {observe((knightPosition) => (<Board knightPosition={knightPosition}/>))}
-    </div>
-  );
+import { useMemo } from 'react'
+import { Board } from './Board.js'
+import { Game } from './Game.js'
+const containerStyle = {
+  width: 500,
+  height: 500,
+  border: '1px solid gray',
 }
-
-export default App;
+/**
+ * The Chessboard Tutorial Application
+ */
+export const App = () => {
+  const game = useMemo(() => new Game(), [])
+  return (
+    <div style={containerStyle}>
+      <Board game={game} />
+    </div>
+  )
+}
